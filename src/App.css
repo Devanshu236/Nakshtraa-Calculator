@@ -1,38 +1,91 @@
-.App {
-  text-align: center;
+/* Centering the form on the page */
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f4f7;
+  padding: 20px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Styling the form */
+form {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 400px;  /* Increased the width of the form */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 15px;
 }
 
-.App-link {
-  color: #61dafb;
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Styling the input fields */
+input, select {
+  padding: 14px;
+  border: 2px solid #ddd;
+  border-radius: 25px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect for input and select fields */
+input:hover, select:hover {
+  border-color: #03a9f4;
+  box-shadow: 0 4px 8px rgba(0, 169, 244, 0.3);
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #6200ea;
+  box-shadow: 0 4px 8px rgba(98, 0, 234, 0.3);
+}
+
+/* Styling the button */
+button {
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  background-color: #6200ea;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+  background-color: #3700b3;
+  box-shadow: 0 4px 8px rgba(98, 0, 234, 0.3);
+}
+
+/* Styling the result box */
+.result {
+  margin-left: 30px; /* Add spacing between calculator and result box */
+  background-color: #eef5ff;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  width: 1200px;  /* Set the result box width same as the form */
+}
+
+.result h2 {
+  margin-top: 0;
+  color: #6200ea;
+}
+
+.result p {
+  font-style: italic;
+  color: #555;
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
