@@ -14,6 +14,7 @@ function App() {
 
   const [nakshatra, setNakshatra] = useState('');
   const [nakshatraDescription, setNakshatraDescription] = useState('');
+  const [detailedDescription, setDetailedDescription] = useState('');
 
   const handleInputChange = (e) => {
     setFormData({
@@ -26,17 +27,38 @@ function App() {
     e.preventDefault();
     const apiUrl = `https://api.horocosmo.com/generate-birth-chart?type=birth&name=${encodeURIComponent(
       formData.name
-    )}&date=${formData.date}&time=${formData.time}&lat=${formData.lat}&lon=${formData.lon}&gender=${formData.gender}`;
+    )}&date=${formData.date}&time=${formData.time}&lat=22&lon=44&gender=${formData.gender}`;
 
     axios.get(apiUrl)
       .then((response) => {
         const data = response.data;
         const moonData = data['data']['Data']['sign']['Moon'];
         const nakshatra = moonData['nakshatra'];
-        const nakshatraDescription = data['data']['Asc sign traits']['Description']; // Extract description
+        const nakshatraDescription = data['data']['Asc sign traits']['Description'];
 
         setNakshatra(nakshatra);
-        setNakshatraDescription(nakshatraDescription); // Set description
+        setNakshatraDescription(nakshatraDescription);
+
+        // Fetch detailed description from new API
+        const detailedApiUrl = `https://api.horocosmo.com/nakshatra?name=${nakshatra}&pada=${moonData['pada']}&gender=${formData.gender}`;
+        
+        return axios.get(detailedApiUrl);
+      })
+      .then((response) => {
+        const detailedData = response.data.data[0];
+        const features = response.data.data[1].Features;
+        const characteristics = response.data.data[2].Characteristics.MaleCharacteristics;
+
+        const detailedDescription = `
+          Nakshatra Name: ${detailedData.Pada.NakshatraName}
+          Pada Characteristics: ${detailedData.Pada.Characteristics}
+          Degree: ${detailedData.Pada.Degree}
+          Ruling Planet: ${detailedData.Pada.RulingPlanet}
+          Features: ${features}
+          Male Characteristics: ${characteristics}
+        `;
+
+        setDetailedDescription(detailedDescription);
       })
       .catch((error) => {
         console.error('There was an error fetching the data!', error);
@@ -77,26 +99,7 @@ function App() {
             placeholder="Time of Birth (HH:MM)"
             required
           />
-        </div>
-        <div>
-          <input
-            type="text"
-            name="lat"
-            value={formData.lat}
-            onChange={handleInputChange}
-            placeholder="Latitude"
-            required
-          />
-        </div>
-        <div>
-          <input
-            type="text"
-            name="lon"
-            value={formData.lon}
-            onChange={handleInputChange}
-            placeholder="Longitude"
-            required
-          />
+       
         </div>
         <div>
           <select
@@ -117,7 +120,16 @@ function App() {
         <div className="result">
           <h2>Nakshatra: {nakshatra}</h2>
           {nakshatraDescription && (
-            <p>{nakshatraDescription}</p>
+            <div className="description-box">
+              <h3>Description</h3>
+              <p>{nakshatraDescription}</p>
+            </div>
+          )}
+          {detailedDescription && (
+            <div className="detailed-description-box">
+              <h3>Detailed Description</h3>
+              <p>{detailedDescription}</p>
+            </div>
           )}
         </div>
       )}

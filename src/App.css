@@ -3,31 +3,30 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 95vh;
   background-color: #f0f4f7;
   padding: 20px;
+  flex-direction: column;
 }
 
 /* Styling the form */
 form {
   background-color: #ffffff;
   padding: 20px;
+  margin-top: 20px;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 400px;  /* Increased the width of the form */
+  width: 100%;
+  max-width: 450px;  /* Increased the width of the form */
   display: flex;
   flex-direction: column;
-  gap: 15px;
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
+  gap: 12px;
+  
 }
 
 /* Styling the input fields */
 input, select {
-  padding: 14px;
+  padding: 12px;
   border: 2px solid #ddd;
   border-radius: 25px;
   font-size: 16px;
@@ -67,13 +66,13 @@ button:hover {
 
 /* Styling the result box */
 .result {
-  margin-left: 30px; /* Add spacing between calculator and result box */
+  margin-top: 16px; /* Adjusted spacing between calculator and result box */
   background-color: #eef5ff;
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-  width: 1200px;  /* Set the result box width same as the form */
+  width: 100%;
+  max-width: 1800px; /* Set the result box width same as the form */
 }
 
 .result h2 {
@@ -81,11 +80,66 @@ button:hover {
   color: #6200ea;
 }
 
-.result p {
+/* Styling the description boxes */
+.description-box,
+.detailed-description-box {
+  margin-top: 6px; /* Spacing between description boxes */
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+}
+
+.detailed-description-box {
+  border-color: #03a9f4;
+  background-color: #ffffff; /* Different color for detailed description box */
+}
+
+.description-box h3,
+.detailed-description-box h3 {
+  margin-top: 0;
+  color: #6200ea;
+}
+
+.description-box p,
+.detailed-description-box p {
+  margin: 0;
   font-style: italic;
   color: #555;
-  padding: 10px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 10px;
+  }
+
+  form {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .result {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  form {
+    padding: 15px;
+    gap: 10px;
+  }
+
+  input, select {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 10px;
+  }
 }
